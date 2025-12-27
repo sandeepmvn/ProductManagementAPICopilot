@@ -51,4 +51,5 @@ public class ProductsController : ControllerBase
         _productService.AddProduct(product);
         return CreatedAtAction(nameof(GetProducts), new { id = product.Id }, product);
     }
+
 }
