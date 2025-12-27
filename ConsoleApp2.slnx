@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ConsoleApp2/ConsoleApp2.csproj" />
+  <Project Path="ProductManagement/ProductManagement.csproj" />
+</Solution>
