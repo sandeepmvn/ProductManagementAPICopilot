@@ -9,7 +9,10 @@ namespace ProductManagement.Controllers;
 public class ProductsController : ControllerBase
 {
     private readonly ProductService _productService;
-
+    /// <summary>
+    /// Initializes a new instance of the ProductsController class using the specified product service.
+    /// </summary>
+    /// <param name="productService">The service used to manage and retrieve product data. Cannot be null.</param>
     public ProductsController(ProductService productService)
     {
         _productService = productService;
