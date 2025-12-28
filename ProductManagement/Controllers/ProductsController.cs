@@ -52,4 +52,25 @@ public class ProductsController : ControllerBase
         return CreatedAtAction(nameof(GetProducts), new { id = product.Id }, product);
     }
 
+    /// <summary>
+    /// Deletes a product by ID.
+    /// </summary>
+    /// <param name="id">The ID of the product to delete</param>
+    /// <returns>No content if successful</returns>
+    /// <response code="204">Product successfully deleted</response>
+    /// <response code="404">Product not found</response>
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public IActionResult DeleteProduct(int id)
+    {
+        var result = _productService.RemoveProduct(id);
+        if (!result)
+        {
+            return NotFound();
+        }
+
+        return NoContent();
+    }
+
 }
