@@ -47,4 +47,25 @@ public class ProductService
         _products.Remove(product);
         return true;
     }
+
+    /// <summary>
+    /// Updates an existing product in the collection with new information.
+    /// </summary>
+    /// <param name="id">The unique identifier of the product to update.</param>
+    /// <param name="updatedProduct">The product object containing the updated information.</param>
+    /// <returns>True if the product was successfully updated; otherwise, false.</returns>
+    public bool UpdateProduct(int id, Product updatedProduct)
+    {
+        ArgumentNullException.ThrowIfNull(updatedProduct);
+        
+        var product = _products.FirstOrDefault(p => p.Id == id);
+        if (product == null)
+        {
+            return false;
+        }
+
+        product.Name = updatedProduct.Name;
+        product.Price = updatedProduct.Price;
+        return true;
+    }
 }

@@ -55,6 +55,37 @@
 }
 ```
 
+### 3. Update a Product
+- **URL**: `/api/products/{id}`
+- **Method**: `PUT`
+- **Description**: Updates an existing product by ID
+- **Request Body**: JSON object with updated product details
+- **Response**: 204 No Content if successful
+
+**Example Request Body:**
+```json
+{
+  "name": "Updated Keyboard",
+  "price": 89.99
+}
+```
+
+**Example Request:**
+```
+PUT /api/products/3
+```
+
+### 4. Delete a Product
+- **URL**: `/api/products/{id}`
+- **Method**: `DELETE`
+- **Description**: Deletes a product by ID
+- **Response**: 204 No Content if successful
+
+**Example Request:**
+```
+DELETE /api/products/1
+```
+
 ## Using Swagger UI
 
 1. **Access Swagger**: Navigate to `/swagger` in your browser (e.g., `https://localhost:5001/swagger`)
@@ -71,6 +102,21 @@
    - Edit the request body JSON
    - Click "Execute"
    - View the created product in the response
+
+4. **Test PUT Endpoint**:
+   - Click on `PUT /api/products/{id}`
+   - Click "Try it out"
+   - Enter the product ID in the id field
+   - Edit the request body JSON with updated values
+   - Click "Execute"
+   - View the 204 No Content response indicating success
+
+5. **Test DELETE Endpoint**:
+   - Click on `DELETE /api/products/{id}`
+   - Click "Try it out"
+   - Enter the product ID to delete
+   - Click "Execute"
+   - View the 204 No Content response indicating success
 
 ## Validation Rules
 
@@ -92,6 +138,20 @@ curl -X POST "https://localhost:5001/api/products" \
   -d "{\"name\":\"Tablet\",\"price\":499.99}"
 ```
 
+**Update a product:**
+```bash
+curl -X PUT "https://localhost:5001/api/products/1" \
+  -H "accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d "{\"name\":\"Updated Laptop\",\"price\":1099.99}"
+```
+
+**Delete a product:**
+```bash
+curl -X DELETE "https://localhost:5001/api/products/1" \
+  -H "accept: application/json"
+```
+
 ## Testing with PowerShell
 
 **Get all products:**
@@ -107,6 +167,21 @@ $body = @{
 } | ConvertTo-Json
 
 Invoke-RestMethod -Uri "https://localhost:5001/api/products" -Method Post -Body $body -ContentType "application/json"
+```
+
+**Update a product:**
+```powershell
+$body = @{
+    name = "Updated Tablet"
+    price = 549.99
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "https://localhost:5001/api/products/1" -Method Put -Body $body -ContentType "application/json"
+```
+
+**Delete a product:**
+```powershell
+Invoke-RestMethod -Uri "https://localhost:5001/api/products/1" -Method Delete
 ```
 
 ## Notes
