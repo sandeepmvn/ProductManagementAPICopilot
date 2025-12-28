@@ -53,6 +53,35 @@ public class ProductsController : ControllerBase
     }
 
     /// <summary>
+    /// Updates an existing product by ID.
+    /// </summary>
+    /// <param name="id">The ID of the product to update</param>
+    /// <param name="product">The updated product information</param>
+    /// <returns>No content if successful</returns>
+    /// <response code="204">Product successfully updated</response>
+    /// <response code="400">If the product is invalid</response>
+    /// <response code="404">Product not found</response>
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public IActionResult UpdateProduct(int id, [FromBody] Product product)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var result = _productService.UpdateProduct(id, product);
+        if (!result)
+        {
+            return NotFound();
+        }
+
+        return NoContent();
+    }
+
+    /// <summary>
     /// Deletes a product by ID.
     /// </summary>
     /// <param name="id">The ID of the product to delete</param>
